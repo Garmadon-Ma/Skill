@@ -43,7 +43,7 @@ These are user preferences applied across IEEE manuscripts, not claims that ever
 ## Required fields by source type
 
 - **Journal article:** authors, article title, standard journal abbreviation, year, and available volume, issue, page range or article number. Month is optional unless required by the target style.
-- **Conference paper:** authors, paper title, established proceedings or conference abbreviation, year, and available pages. Location and month follow the target venue convention.
+- **Conference paper:** authors, paper title, established proceedings or conference abbreviation, official event location, month, year, and available pages. Include the location and month whenever they can be verified from an official conference or proceedings record, unless the user or target venue explicitly requires their omission.
 - **Book:** authors or editors, title, edition when applicable, city, publisher, and year.
 - **Book chapter or proceedings chapter:** chapter authors and title, book or proceedings title, editors when required, volume or series when identifying, pages, publisher, and year.
 - **Standard, report, thesis, dataset, software, or online-only source:** use its correct entry type and retain the organization, institution, report number, version, repository, or URL needed to identify it. Do not force it into an article or conference template.
@@ -63,6 +63,25 @@ The supplied IEEE examples use these direct conference forms. Use them when cons
 
 For other venues, verify the established form first. For example, `Proc. IEEE/CVF Conf. Comput. Vis. Pattern Recognit.` is preferable to an improvised abbreviation. Do not mix a full conference title, an abbreviated title, dates, and the same acronym in one redundant `booktitle`.
 
+## Conference location and month
+
+Use separate BibTeX fields for conference place and month so that the active IEEE bibliography style controls their position and punctuation:
+
+```bibtex
+booktitle = {Proc. ICML},
+address   = {Sydney, NSW, Australia},
+month     = aug,
+year      = {2017},
+pages     = {2642--2651},
+```
+
+- Record the official event location, not the publisher's office, an author's affiliation, or the online publication location.
+- Use the compact IEEE place form shown by the official record, such as `Nashville, TN, USA`, `Vancouver, BC, Canada`, `Kigali, Rwanda`, or `Singapore`.
+- Use the standard BibTeX month macros `jan` through `dec`; do not place a full date range in `month` unless the target style explicitly requires it.
+- For a fully virtual event, use `address = {Virtual Conference}` and retain the verified event month. For a hybrid event, use the physical host location when the official conference record identifies one.
+- If the official record gives a month but no location, retain the month and report the unresolved location instead of guessing. Do not infer a location from a planned venue after an event moved online.
+- Keep location and month out of `booktitle`. A normalized IEEE result should read in the order `in Proc. [venue], [location], [month] [year], pp. [pages]` when all fields are available.
+
 ## Verification sources
 
 Use primary sources in this order when metadata is uncertain:
@@ -78,8 +97,8 @@ Check title, complete author order, venue, year, volume, issue, pages or article
 
 1. Locate every relevant `.tex`, `.bib`, `.bst`, `.bbl`, and PDF. Read the bibliography command in the active manuscript instead of assuming that a similarly named `.bib` file is used.
 2. Record the target venue and its style evidence. Identify any explicit user preferences before editing.
-3. Audit cited keys, duplicate keys, duplicate publications under different keys, missing required fields, stale early-access metadata, malformed page ranges, unprotected acronyms, and inconsistent venue names.
-4. Verify uncertain publication metadata using primary sources. Keep the original citation key while replacing incorrect fields.
+3. Audit cited keys, duplicate keys, duplicate publications under different keys, missing required fields, stale early-access metadata, malformed page ranges, unprotected acronyms, inconsistent venue names, and missing conference locations or months.
+4. Verify uncertain publication metadata using primary sources. For conference papers, verify the final event location and month as well as the paper metadata. Keep the original citation key while replacing incorrect fields.
 5. Edit only the in-scope entries. Preserve unrelated user changes.
 6. Regenerate the bibliography explicitly. For BibTeX projects, run BibTeX after the `.bib` edit and then run LaTeX enough times to resolve citations; do not rely on a stale `.bbl` or an incremental build that skipped BibTeX.
 7. Inspect the exact changed entries in the new `.bbl`, then inspect the reference pages in the final PDF when available.
@@ -94,6 +113,7 @@ Check title, complete author order, venue, year, volume, issue, pages or article
 - Acronyms and proper names retain their intended capitalization in the `.bbl` and PDF.
 - DOI and URL output follows the user's reusable preference or an explicit override.
 - Journal and conference names use established abbreviations consistently.
+- Every conference reference includes a verified event location and month, or the unresolved field is explicitly reported.
 - No duplicate venue information remains.
 - The `.bbl` modification time and content confirm that the bibliography was regenerated after the `.bib` edit.
 - Compilation completes without undefined citations, missing bibliography entries, BibTeX errors, or relevant metadata warnings.
