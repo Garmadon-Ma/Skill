@@ -1,0 +1,4 @@
+interface:
+  display_name: "IEEE Reference"
+  short_description: "Audit and normalize IEEE BibTeX references"
+  default_prompt: "Audit and normalize my bibliography for the target IEEE venue. Preserve citation keys, verify metadata from authoritative sources, remove DOI and unnecessary URL output unless I say otherwise, rebuild the bibliography, and inspect the final rendered references."
