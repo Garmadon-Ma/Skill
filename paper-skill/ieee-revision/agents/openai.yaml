@@ -1,0 +1,5 @@
+interface:
+  display_name: "IEEE Revision"
+  short_description: "Create and audit IEEE revision response letters"
+  default_prompt: "Use $ieee-revision to format or audit my IEEE response letter from each reviewer comment through the Response and Changes sections."
+
