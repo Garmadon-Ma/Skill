@@ -1,0 +1,22 @@
+% Local table style extracted from the approved OSR-FETF table family.
+% Load in the preamble; it does not restyle figure or algorithm captions.
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{approved-paper-tables}[2026/10/10 Reusable personal table style]
+\RequirePackage{booktabs,multirow,array,threeparttable,tabularx,amssymb}
+\RequirePackage[table]{xcolor}
+\makeatletter
+\let\ApprovedOriginalCaption\@makecaption
+\makeatother
+\RequirePackage{caption}
+\makeatletter
+\let\ApprovedTableCaption\@makecaption
+\AtBeginDocument{\let\@makecaption\ApprovedOriginalCaption}
+\newcommand{\ApprovedTableSetup}{%
+  \let\@makecaption\ApprovedTableCaption
+  \renewcommand{\tablename}{TABLE}%
+  \captionsetup{font=normalsize,labelfont=normalfont,textfont=normalfont,
+    labelsep=colon,justification=centering,singlelinecheck=false,skip=6pt}%
+}
+\makeatother
+\definecolor{ApprovedTableOurs}{HTML}{E8F0FA}
+\endinput
